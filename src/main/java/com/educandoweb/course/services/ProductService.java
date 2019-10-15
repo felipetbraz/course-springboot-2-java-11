@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -44,7 +45,7 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public ProductDTO insert(ProductCategoriesDTO dto) {
+	public ProductDTO insert(@Valid ProductCategoriesDTO dto) {
 		Product entity = dto.toEntity();
 		setProductCategories(entity, dto.getCategories());
 		entity = repository.save(entity);
