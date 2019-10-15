@@ -45,7 +45,7 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public ProductDTO insert(@Valid ProductCategoriesDTO dto) {
+	public ProductDTO insert(ProductCategoriesDTO dto) {
 		Product entity = dto.toEntity();
 		setProductCategories(entity, dto.getCategories());
 		entity = repository.save(entity);
