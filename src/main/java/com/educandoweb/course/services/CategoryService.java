@@ -33,7 +33,6 @@ public class CategoryService {
 	public List<CategoryDTO> findAll(){
 		List<Category> list = repository.findAll();
 		return list.stream().map(e -> new CategoryDTO(e)).collect(Collectors.toList());
-		
 	}
 	
 	public CategoryDTO findById(Long id) {
