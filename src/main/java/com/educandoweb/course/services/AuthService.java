@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.dto.CredentialsDTO;
 import com.educandoweb.course.dto.TokenDTO;
+import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
 import com.educandoweb.course.security.JWTUtil;
@@ -55,5 +56,11 @@ public class AuthService {
 			throw new JWTAuthenticationException("Access denied");
 		}
 	}
-
+	
+	public void validateOwnOrderOrAdmin(Order order) {
+		User user = authenticated();
+		if(user == null || (user.getId().equals(order.getClient().getId())) && !user.hasRole("ROLE_ADMIN")) {
+			throw new JWTAuthenticationException("Access denied");
+		}
+	}
 }
